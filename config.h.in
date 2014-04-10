@@ -82,3 +82,7 @@
 /* Puts following code inside the Google namespace */
 #cmakedefine _START_GOOGLE_NAMESPACE_ @_START_GOOGLE_NAMESPACE_@
 
+#ifdef _WIN32
+#include <windows/port.h>
+#define CTEMPLATE_DLL_DECL
+#endif

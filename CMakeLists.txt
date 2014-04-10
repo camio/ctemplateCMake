@@ -39,8 +39,8 @@ set( HAVE_UINT32_T 1 )
 check_include_files("unistd.h" HAVE_UNISTD_H )
 set( HAVE_UNORDERED_MAP 1 )
 if( WIN32 )
-  set( HAVE___INT32_T 1 )
-  set( HAVE___INT64_T 1 )
+  set( HAVE___INT32 1 )
+  set( HAVE___INT64 1 )
 else()
   set( HAVE_UINT64_T 1 )
 endif()
@@ -72,13 +72,20 @@ set( ac_have_attribute_weak 0 )
 set( ac_google_attribute 0 )
 set( ac_htmlparser_namespace google_ctemplate_streamhtmlparser )
 if( WIN32 )
-  set( ac_cv_uint64 __int64_t )
+  set( ac_cv_uint64 __int64 )
 else()
   set( ac_cv_uint64 uint64_t )
 endif()
 
 # Generate 'config.h'
 configure_file( config.h.in "${CMAKE_CURRENT_BINARY_DIR}/config.h" @ONLY )
+
+# On windows builds make a copy of config.h that resides in the
+# windows folder. Some of ctemplate's include files require one to be there and
+# it needs to be the same as the one generated.
+if( WIN32 )
+  configure_file( config.h.in "${CMAKE_CURRENT_BINARY_DIR}/windows/config.h" @ONLY )
+endif()
 
 # Generate other header files
 configure_file(
