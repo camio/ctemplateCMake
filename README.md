@@ -1,4 +1,4 @@
-cTemplate CMake
+ctemplate CMake
 ===============
 
 The purpose of this repository is to provide CMake build scripts for the
